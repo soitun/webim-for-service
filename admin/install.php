@@ -62,6 +62,7 @@ if( $valid ){
 	#webim_insert_template();
 	#webim_clean_cache();
 	webim_lock();
+	webim_admin_login($_IMC["admin_login"], $_IMC["admin_password"]);
 	header("Location: index.php?install");
 }else{
 	if ( isset( $_GET['success'] ) ) {
