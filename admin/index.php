@@ -34,7 +34,7 @@ if ( isset( $_GET['add_user'] ) ) {
 echo webim_header( '用户管理' );
 echo webim_menu( 'index' );
 $users = $imdb->get_results( $imdb->prepare( "SELECT * FROM $imdb->webim_users" ) );
-$webim_path = webim_urlpath();
+$webim_path = dirname(webim_urlpath()) . "/";
 
 ?>
 <div id="content">
