@@ -58,7 +58,7 @@ $webim_path = dirname(webim_urlpath()) . "/";
 				<td><?php echo $user->password ?></td>
 				<td><?php echo $user->nick ?></td>
 				<td><?php echo $user->email ?></td>
-				<td><a href="user.php?id=<?php echo $user->id ?>">修改</a>&nbsp;<a href="user.php?id=<?php echo $user->id ?>">删除</a></td>
+				<td><a href="user.php?id=<?php echo $user->id ?>">修改</a>&nbsp;<!--a href="user.php?id=<?php echo $user->id ?>">删除</a--></td>
 			</tr>
 			<?php } ?>
 		</tbody>
