@@ -7,6 +7,7 @@
 		online:path + "im.php?webim_action=online",
 		offline:path + "im.php?webim_action=offline",
 		message:path + "im.php?webim_action=message",
+		logmsg:path + "im.php?webim_action=logmsg",
 		presence:path + "im.php?webim_action=presence",
 		refresh:path + "im.php?webim_action=refresh",
 		status:path + "im.php?webim_action=status"
@@ -55,6 +56,7 @@
 		disable_group: true
 	} );
 	ui.addApp("visitorstatus");
+	ui.addApp("logmsg");
 	//ui.addApp("room");
 	//ui.addApp("notification");
 	//ui.addApp("setting", {"data": webim.setting.defaults.data});

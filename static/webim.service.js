@@ -2003,8 +2003,8 @@ model("history",{
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Fri Dec 31 11:08:49 2010 +0800
- * Commit: 4dca586d1f943f48a33a42a9c37c2ceb179dc1f1
+ * Date: Fri Dec 31 14:54:29 2010 +0800
+ * Commit: 21f39629ae80c0bc6d5501b314f1eb9c3b0ec34c
  */
 (function(window,document,undefined){
 
@@ -4730,6 +4730,38 @@ app("visitorstatus", {
 	},
 	ready: function( param ) {
 		param.visitorstatus = this.visitorstatus;
+	}
+});
+
+/* 
+* ui.logmsg
+*
+* Log user message to db.
+*
+* options:
+*
+* methods:
+* 
+* events: 
+* 
+*/
+
+app("logmsg", {
+	init: function(options){
+		var ui = this, im = ui.im;
+		im.connection.bind("data",function(data){
+			var messages = data && data.messages;
+			for (var i = 0; i < messages.length; i++) {
+				var msg = messages[i];
+				msg.ticket = im.data.connection.ticket;
+				im.request({
+					type: 'post',
+					url: im.options.urls.logmsg,
+					cache: false,
+					data: msg
+				});
+			};
+		});
 	}
 });
 
