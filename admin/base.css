@@ -198,6 +198,7 @@ a:hover{
 	border: 1px solid #D8D8E5;
 	background: #E5E8FF;
 	padding: 6px 10px;
+	white-space: normal;
 }
 
 #users{

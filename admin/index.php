@@ -2,7 +2,6 @@
 
 require_once( dirname( __FILE__ ) . '/' . 'admin_common.php' );
 
-
 /** Check install */
 #if ( ! isset( $_IMC['version'] ) ) {
 if ( ! webim_is_lock() ) {
@@ -35,6 +34,8 @@ if ( isset( $_GET['add_user'] ) ) {
 echo webim_header( '用户管理' );
 echo webim_menu( 'index' );
 $users = $imdb->get_results( $imdb->prepare( "SELECT * FROM $imdb->webim_users" ) );
+$webim_path = webim_urlpath();
+
 ?>
 <div id="content">
 	<?php echo $notice ?>
@@ -62,6 +63,17 @@ $users = $imdb->get_results( $imdb->prepare( "SELECT * FROM $imdb->webim_users" 
 			<?php } ?>
 		</tbody>
 	</table>
+	<h3 id="header-title">使用</h3>
+	<p>在安装IM服务器时，验证地址填写下面地址：</p>
+	<pre>
+<?php echo $webim_path . "auth.php"; ?>
+	</pre>
+	<p>将下面代码插入需要安装WebIM的网页<?php echo htmlspecialchars("</body>") ?>标签前即可。
+	<pre>
+<?php 
+echo htmlspecialchars( "<script type=\"text/javascript\" src=\"${webim_path}custom.js.php\"></script>" );
+?>
+	</pre>
 </div>
 <script type="text/javascript" src="../custom.js.php"></script>
 <?php
