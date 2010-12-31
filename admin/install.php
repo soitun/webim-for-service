@@ -103,7 +103,7 @@ EOF;
 		<div class="box$err_c">
 		<h3>设置安装信息</h3>
 		<div class="box-c">
-				<p class="box-desc">请先安装im服务器获得注册域名和apikey</p>
+				<p class="box-desc">注册域名和apikey可等im服务器安装好后再更改</p>
 			$err
 			<form action="" method="post" class="form">
 $form
