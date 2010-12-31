@@ -18,7 +18,6 @@ SRC_FILES = ${SRC_DIR}/*.php \
 	    ${SRC_DIR}/lib \
 	    ${SRC_DIR}/static \
 	    ${SRC_DIR}/admin \
-	    ${SRC_DIR}/table \
 
 all: ${REL_FILE}
 	@@echo "Build complete."
