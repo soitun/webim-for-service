@@ -74,6 +74,7 @@ function webim_set_user() {
 	}
 	$imuser->id = $id;
 	$imuser->nick = $nick;
+	$imuser->visitor = "true";
 	$imuser->pic_url = gravatar("");
 	$imuser->default_pic_url = gravatar("");
 	$imuser->show = webim_gp('show') ? webim_gp('show') : "available";
