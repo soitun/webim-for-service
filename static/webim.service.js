@@ -5,8 +5,8 @@
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Tue Sep 28 19:32:15 2010 +0800
- * Commit: 0b2752a7bde44a89ba504019f3aa3ac5a75c5f43
+ * Date: Wed Jan 12 15:22:21 2011 +0800
+ * Commit: 6ed78fda30665f4d3bb5d01dce1764ff94568334
  */
 (function(window, document, undefined){
 
@@ -949,6 +949,7 @@ extend(comet.prototype, objectExtend, {
                 if(options.jsonp){
                 	extend(o,{
                 	        timeout: options.timeout,
+				async: true,
                 	        dataType: 'jsonp',
                 	        jsonp: 'callback'
                 	});
@@ -1196,12 +1197,12 @@ extend(webim.prototype, objectExtend,{
 		var self = this, data = self.data, history = self.history, buddy = self.buddy, room = self.room;
 		history.option("userInfo", data.user);
 		var ids = [];
-		each(data.buddies, function(n, v){
+		data.buddies && each(data.buddies, function(n, v){
 			history.init("unicast", v.id, v.history);
 		});
 		buddy.handle(data.buddies);
 		//rooms
-		each(data.rooms, function(n, v){
+		data.rooms && each(data.rooms, function(n, v){
 			history.init("multicast", v.id, v.history);
 		});
 		//blocked rooms
@@ -1209,7 +1210,7 @@ extend(webim.prototype, objectExtend,{
 		isArray(b) && roomData && each(b,function(n,v){
 			roomData[v] && (roomData[v].blocked = true);
 		});
-		room.handle(roomData);
+		roomData && room.handle(roomData);
 		room.options.ticket = data.connection.ticket;
 		self.trigger("go",[data]);
 		self.connection.connect(data.connection);
@@ -2003,8 +2004,8 @@ model("history",{
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Fri Dec 31 14:54:29 2010 +0800
- * Commit: 21f39629ae80c0bc6d5501b314f1eb9c3b0ec34c
+ * Date: Fri Dec 31 22:48:17 2010 +0800
+ * Commit: c3e67de3718815747038c2d69985f528e1b86a72
  */
 (function(window,document,undefined){
 
