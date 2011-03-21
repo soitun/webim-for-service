@@ -48,6 +48,7 @@ $webim_path = dirname(webim_urlpath()) . "/";
 				<th>密码</th>
 				<th>昵称</th>
 				<th>邮箱</th>
+				<th>限制域</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
@@ -58,6 +59,7 @@ $webim_path = dirname(webim_urlpath()) . "/";
 				<td><?php echo $user->password ?></td>
 				<td><?php echo $user->nick ?></td>
 				<td><?php echo $user->email ?></td>
+				<td><?php echo $user->domain ?></td>
 				<td><a href="user.php?id=<?php echo $user->id ?>">修改</a>&nbsp;<!--a href="user.php?id=<?php echo $user->id ?>">删除</a--></td>
 			</tr>
 			<?php } ?>
@@ -74,6 +76,13 @@ $webim_path = dirname(webim_urlpath()) . "/";
 echo htmlspecialchars( "<script type=\"text/javascript\" src=\"${webim_path}custom.js.php\"></script>" );
 ?>
 	</pre>
+	<p>如果有域限制，采用下面代码，更改一下域名参数</p>
+	<pre>
+<?php 
+echo htmlspecialchars( "<script type=\"text/javascript\" src=\"${webim_path}custom.js.php?domain=webim20.cn\"></script>" );
+?>
+	</pre>
+
 </div>
 <script type="text/javascript" src="../custom.js.php"></script>
 <?php

@@ -19,6 +19,7 @@ if( !empty($_POST) ) {
 	$user->password = $_POST['password'];
 	$user->nick = $_POST['nick'];
 	$user->email = $_POST['email'];
+	$user->domain = $_POST['domain'];
 }
 
 $type = $user->id ? "更新" : "添加";
@@ -87,6 +88,7 @@ $form = implode("", array(
 	webim_text_tag( "password", $user->password, "密码：", "登录客户端密码" ), 
 	webim_text_tag( "nick", $user->nick, "昵称：", "" ), 
 	webim_text_tag( "email", $user->email, "邮箱：", "用来显示该邮箱在<a href='http://www.gravatar.com'>gravatar.com</a>上注册的头像" ), 
+	webim_text_tag( "domain", $user->domain, "限制域：", "通过域名限制访客能看到的用户，多个时逗号分隔，如：blog.webim20.cn,www.webim20.cn" ), 
 ));
 $msg = <<<EOF
 		<div class="box$err_c">

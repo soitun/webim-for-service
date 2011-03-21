@@ -37,6 +37,7 @@ CREATE TABLE $imdb->webim_users (
 	`password` varchar(50) DEFAULT NULL,
 	`nick` varchar(50) DEFAULT NULL,
 	`email` varchar(100) DEFAULT NULL,
+	`domain` varchar(500) DEFAULT NULL,
 	`created_at` datetime DEFAULT NULL,
 	`updated_at` datetime DEFAULT NULL,
 	PRIMARY KEY (`id`) 

@@ -27,6 +27,7 @@ if ( $im_is_login ) {
 ?>
 var _IMC = {
 production_name: '<?php echo WEBIM_PRODUCT_NAME ?>',
+domain: '<?php echo webim_gp('domain'); ?>',
 version: '<?php echo $_IMC['version']; ?>',
 path: '<?php echo $webim_path; ?>',
 is_login: '<?php echo $im_is_login ? "1" : "" ?>',

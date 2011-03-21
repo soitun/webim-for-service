@@ -96,18 +96,21 @@ function webim_login( $username, $password ) {
  * Online buddy list.
  *
  */
-function webim_get_online_buddies() {
+
+function webim_get_online_buddies($domain = null) {
 	global $imuser, $imdb;
 	$list = array();
 	$query = $imdb->prepare( "SELECT * FROM $imdb->webim_users" );
 	foreach( $imdb->get_results( $query ) as $value ) {
-		$list[] = (object)array(
-			"id" => $value->login,
-			"nick" => $value->nick,
-			"group" => "friend",
-			"url" => profile_url($value->email),
-			"pic_url" => gravatar($value->email)
-		);
+		if( check_domain( $value->domain, $domain) ){
+			$list[] = (object)array(
+				"id" => $value->login,
+				"nick" => $value->nick,
+				"group" => "friend",
+				"url" => profile_url($value->email),
+				"pic_url" => gravatar($value->email)
+			);
+		}
 	}
 	return $list;
 }
@@ -121,7 +124,25 @@ function webim_get_online_buddies() {
  *
  */
 
-function webim_get_buddies( $names, $uids = null ) {
+function check_domain($buddy_domain, $domain){
+	if( !$domain && !$buddy_domain ){
+		return true;
+	} elseif ( $domain && $buddy_domain ){
+		$domain = strtolower($domain);
+		$ar = explode(",", strtolower($buddy_domain));
+		foreach ($ar as $d) {
+			if( $d ){
+				$d = str_replace($d, "|", $domain);
+				if( substr($d, -1) == "|" ){
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+function webim_get_buddies( $names, $uids = null, $domain = null ) {
 	global $_SGLOBAL, $imuser, $imdb;
 	$where_name = "";
 	$where_uid = "";
@@ -137,13 +158,15 @@ function webim_get_buddies( $names, $uids = null ) {
 	$list = array();
 	$query = $imdb->prepare( "SELECT * FROM $imdb->webim_users WHERE $where_sql" );
 	foreach( $imdb->get_results( $query ) as $value ) {
-		$list[] = (object)array(
-			"id" => $value->login,
-			"nick" => $value->nick,
-			"group" => "friend",
-			"url" => profile_url($value->email),
-			"pic_url" => gravatar($value->email)
-		);
+		if( check_domain( $value->domain, $domain) ){
+			$list[] = (object)array(
+				"id" => $value->login,
+				"nick" => $value->nick,
+				"group" => "friend",
+				"url" => profile_url($value->email),
+				"pic_url" => gravatar($value->email)
+			);
+		}
 	}
 	return $list;
 }

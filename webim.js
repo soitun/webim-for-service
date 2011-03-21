@@ -4,7 +4,7 @@
 	webim.extend( webim.setting.defaults.data, _IMC.setting );
 	var webim = window.webim;
 	webim.defaults.urls = {
-		online:path + "im.php?webim_action=online",
+		online:path + "im.php?webim_action=online&domain=" + (_IMC.domain || ""),
 		offline:path + "im.php?webim_action=offline",
 		message:path + "im.php?webim_action=message",
 		logmsg:path + "im.php?webim_action=logmsg",
