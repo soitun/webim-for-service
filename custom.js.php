@@ -38,9 +38,9 @@ setting:{
 		buddy_sticky: true
 },
 disable_chatlink: '<?php echo $_IMC['disable_chatlink'] ? "1" : "" ?>',
-title: '<?php echo $_IMC['title']; ?>',
-theme: '<?php echo $_IMC['theme']; ?>',
-local: '<?php echo $_IMC['local']; ?>',
+title: '<?php echo webim_gp('title') ? webim_gp('title') : $_IMC['title']; ?>',
+theme: '<?php echo webim_gp('theme') ? webim_gp('theme') : $_IMC['theme']; ?>',
+local: '<?php echo webim_gp('local') ? webim_gp('local') : $_IMC['local']; ?>',
 jsonp: '<?php echo $webim_jsonp ? "1" : "" ?>',
 min: window.location.href.indexOf("webim_debug") != -1 ? "" : ".min"
 };
