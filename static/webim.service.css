@@ -5,8 +5,8 @@
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Fri Dec 31 22:48:17 2010 +0800
- * Commit: c3e67de3718815747038c2d69985f528e1b86a72
+ * Date: Sat Dec 3 00:57:22 2011 +0800
+ * Commit: e6b34110d29159b467f829e781815683f208298b
  */
 
 body {
@@ -37,9 +37,11 @@ body {
 }
 .webim h4{
         font-size: 1em;
+	line-height: 1;
 }
 .webim h5{
         font-size: .83em;
+	line-height: 1;
 }
 .webim-gray{
         /*

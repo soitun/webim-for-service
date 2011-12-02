@@ -5,8 +5,8 @@
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Wed Jan 12 15:22:21 2011 +0800
- * Commit: 6ed78fda30665f4d3bb5d01dce1764ff94568334
+ * Date: Wed Jun 15 18:30:22 2011 +0800
+ * Commit: 0e3e4d0b4e288d5ae271a58a69bdd2856d08eb10
  */
 (function(window, document, undefined){
 
@@ -1242,7 +1242,7 @@ extend(webim.prototype, objectExtend,{
 		}).bind("error",function(data){
 			self._stop("connect", "Connect Error");
 		}).bind("close",function(data){
-			self._stop("connect", "Disconnect");
+			!self.options.disableDisconnect && self._stop("connect", "Disconnect");
 		});
 		self.bind("message", function(data){
 			var online_buddies = [], l = data.length, uid = self.data.user.id, v, id, type;
@@ -2004,8 +2004,8 @@ model("history",{
  * Copyright (c) 2010 Hidden
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Fri Dec 31 22:48:17 2010 +0800
- * Commit: c3e67de3718815747038c2d69985f528e1b86a72
+ * Date: Sat Dec 3 00:57:22 2011 +0800
+ * Commit: e6b34110d29159b467f829e781815683f208298b
  */
 (function(window,document,undefined){
 
@@ -2445,9 +2445,7 @@ function i18n(name, args, options){
 
 	if (args) {
 		i18nArgs = args;
-		for (var key in args) {
-			str = str.replace(/\{\{(.*?)\}\}/g, i18nRe);
-		}
+		str = str.replace(/\{\{(.*?)\}\}/g, i18nRe);
 	}
 	return str;
 };
@@ -4343,6 +4341,8 @@ offline
 online
 
 */
+
+var _buddyIMOnline = false;
 app("buddy", {
 	init: function(options){
 		options = options || {};
@@ -4379,13 +4379,14 @@ app("buddy", {
 			ui.addChat("buddy", info.id);
 			ui.layout.focusChat("buddy", info.id);
 		});
+		//Bug... 如果用户还没登录，点击， status.set 会清理掉正在聊天的session
 		buddyUI.window.bind("displayStateChange",function(type){
 			if(type != "minimize"){
 				buddy.option("active", true);
-				im.status.set("b", 1);
+				_buddyIMOnline && im.status.set("b", 1);
 				buddy.complete();
 			}else{
-				im.status.set("b", 0);
+				_buddyIMOnline && im.status.set("b", 0);
 				buddy.option("active", false);
 			}
 		});
@@ -4417,11 +4418,13 @@ app("buddy", {
 	go: function(){
 		var ui = this, im = ui.im, buddy = im.buddy, buddyUI = ui.buddy;
 		ui.user && !ui.user._initElement && buddyUI.window.subHeader(ui.user.element);
+		_buddyIMOnline = true;
 		buddyUI.titleCount();
 		buddyUI.hideError();
 	},
 	stop: function(type, msg){
 		var ui = this, im = ui.im, buddy = im.buddy, buddyUI = ui.buddy;
+		_buddyIMOnline = false;
 		buddyUI.offline();
 		if ( type == "online" || type == "connect" ) {
 			buddyUI.showError( msg );
